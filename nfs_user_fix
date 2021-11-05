@@ -1,0 +1,17 @@
+#!/bin/bash
+
+## User and group configuration
+usermod -u 5000 chibchohaec
+addgroup -g chibchohaec
+groupmod -g 5000 chibchohaec
+usermod -g chibchohaec chibchohaec
+
+## NFS configuration
+cd /usr/sbin
+if [ ! -f /usr/sbin/nfs_config_original ]; then
+ mv nfs_config nfs_config_original; 
+ cp /usr/local/config/nfs_config_script ./nfs_config;
+fi;
+nfs_config
+exportfs -r
+  

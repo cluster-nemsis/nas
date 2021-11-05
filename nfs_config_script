@@ -1,0 +1,8 @@
+#!/bin/bash
+
+## Run original NFS configuration tool
+/usr/sbin/nfs_config_original
+
+## Change information regarding
+sed -i /etc/exports -rne 's/anonuid.*)/\1anonuid=5000,anongid=5000)/p'
+exportfs -r
